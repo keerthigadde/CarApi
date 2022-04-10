@@ -20,14 +20,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api" )
 @Validated
 @Api(tags = {SwaggerConfiguration.CAR_TAG})
 public class CarController {
     @Autowired
     private CarService carService;
 
-    @GetMapping("/cars")
+    @GetMapping(value = "/cars", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(
             value = "Get all cars",
             notes = "Returns all cars",
@@ -52,7 +52,7 @@ public class CarController {
         return ResponseEntity.ok().body(carService.findCarById(carId));
     }
 
-    @PostMapping("/cars")
+    @PostMapping(value = "/cars", produces =MediaType.APPLICATION_JSON_VALUE , consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(
             value = "Create new car",
             notes = "Creates new car. Returns created car with id.",
@@ -65,7 +65,7 @@ public class CarController {
 
     }
 
-    @PutMapping("/cars/{id}")
+    @PutMapping(value="/cars/{id}", produces =MediaType.APPLICATION_JSON_VALUE , consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(
             value = "update existing car",
             notes = "Creates existing car. Returns updated car with the path id.",
@@ -78,7 +78,7 @@ public class CarController {
         return ResponseEntity.ok().body(carService.updateCar(carId, car));
     }
 
-    @DeleteMapping("/cars/{id}")
+    @DeleteMapping(value ="/cars/{id}", produces =MediaType.APPLICATION_JSON_VALUE )
     @ApiOperation(
             value = "deleting existing car with path id",
             notes = "Creates existing car. Returns updated car with the path id.",
